@@ -1,32 +1,49 @@
 # Hangman game
-#
+# v1.01
 
 # -----------------------------------
-# Helper code
-# You don't need to understand this helper code,
-# but you will have to know how to use the functions
-# (so be sure to read the docstrings!)
+# Simple command-line game
+# Exercise to learn Python basics
+#
+#
+# Tasks to be done:
+    # Modify input code to accept uppercase letters (in progress)
+    # Improve code to use str.find() function instead of custom loops
+    # Implement basic UI
+
+
+# -----------------------------------------------------
+# Beginning of primer code
 
 import random
-
 WORDLIST_FILENAME = "words.txt"
 
+print("")
+print("Welcome to Hangman Game v1.01")
+print("")
+
+
 def loadWords():
-    """
-    Returns a list of valid words. Words are strings of lowercase letters.
     
-    Depending on the size of the word list, this function may
-    take a while to finish.
+    """
+    Returns a list of valid words.
+    Assumes words are sequences of lowercase letters.
+    Only returns sequences of lowercase letters.
     """
     print("Loading word list from file...")
+    
     # inFile: file
     inFile = open(WORDLIST_FILENAME, 'r')
+    
     # line: string
     line = inFile.readline()
+    
     # wordlist: list of strings
     wordlist = line.split()
     print("  ", len(wordlist), "words loaded.")
+    print("")
     return wordlist
+
 
 def chooseWord(wordlist):
     """
@@ -36,13 +53,13 @@ def chooseWord(wordlist):
     """
     return random.choice(wordlist)
 
-# end of helper code
-# -----------------------------------
 
-# Load the list of words into the variable wordlist
-# so that it can be accessed from anywhere in the program
 wordlist = loadWords()
 
+
+# End of primer code
+#------------------------------------------------------------
+# Utility code
 
 def isWordGuessed(secretWord, lettersGuessed):
     '''
@@ -51,19 +68,11 @@ def isWordGuessed(secretWord, lettersGuessed):
     returns: boolean, True if all the letters of secretWord are in lettersGuessed;
       False otherwise
     '''
-    
+
     for s1 in secretWord:
-        letterIsIn=False
-        for s2 in lettersGuessed:
-            if s1==s2:
-                letterIsIn=True
-        if letterIsIn==False:
+        if lettersGuessed.find(s1)<0:
             return False
     return True
-                
-                
-    
-    # FILL IN YOUR CODE HERE...
 
 
 
