@@ -9,7 +9,9 @@
 # Tasks to be done:
     # Modify input code to accept uppercase letters (in progress)
     # Improve code to use str.find() function instead of custom loops
+    #   Merge isLetterGuessed and letterInWord, and other similar optimizations
     # Implement basic UI
+
 
 
 # -----------------------------------------------------
@@ -73,23 +75,21 @@ def isWordGuessed(secretWord, lettersGuessed):
         if lettersGuessed.find(s1)<0:
             return False
     return True
-
+                
 
 
 def isLetterGuessed(lettersGuessed,letter):
     
-    for s1 in lettersGuessed:
-        if letter==s1:
-            return True
+    if lettersGuessed.find(letter)<0:
+        return False
+    return True
 
-    return False
 
 def letterInWord(word,let):
-    for s in word:
-        if s==let:
-            return True
-    return False
-
+    
+    if word.find(let)<0:
+        return False
+    return True
 
 
 def getGuessedWord(secretWord, lettersGuessed):
@@ -99,7 +99,7 @@ def getGuessedWord(secretWord, lettersGuessed):
     returns: string, comprised of letters and underscores that represents
       what letters in secretWord have been guessed so far.
     '''
-    # FILL IN YOUR CODE HERE...
+
     guessedWord=""
     i=0
     for s1 in secretWord:
@@ -120,7 +120,7 @@ def getAvailableLetters(lettersGuessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE...
+
     letters="abcdefghijklmnopqrstuvqxyz"
     availableLetters=""
     i=0
@@ -157,7 +157,6 @@ def hangman(secretWord):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE...
     guesses=12
     lettersGuessed=""
     
@@ -199,9 +198,7 @@ print(hangman(chooseWord(wordlist)))
 
 
 
-# When you've completed your hangman function, uncomment these two lines
-# and run this file to test! (hint: you might want to pick your own
-# secretWord while you're testing)
 
+# Alternate call:
 # secretWord = chooseWord(wordlist).lower()
 # hangman(secretWord)
